@@ -13,3 +13,5 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+chainlink_data/*
+susy-external-initiator/config.yaml

@@ -1,0 +1,70 @@
+api:
+  email: admi@email.com
+  jobid: 244b8cc7-d791-4c98-a307-4b4affda6927
+  password: password
+  url: http://localhost:7788
+chains:
+  ava:
+    chainname: AVA
+    endpoint: https://api.avax.network/ext/bc/C/rpc
+    framesize: 100000
+    lastvisitedblock: 3087906
+    lockdepth: 100000
+    parsercontract: 0x84921D3a4cFA23ddC5674Cf8C5E9FFbfEaDb95aE
+    relaycontract: 0x9366EA2931F069C115Dd7ea041d8eAFd1C76f444
+  bsc:
+    chainname: BSC
+    endpoint: https://bsc-dataseed.binance.org/
+    framesize: 5000
+    lastvisitedblock: 10200328
+    lockdepth: 100000
+    parsercontract: 0x9a0b9184c65e508344d2a75adaed4a73ce2cd256
+    relaycontract: 0x7DF3ba8e3a8aC6759f215d734Dc4afdB34739618
+  dai:
+    chainname: DAI
+    endpoint: https://rpc.xdaichain.com/
+    framesize: 10000
+    lastvisitedblock: 17681109
+    lockdepth: 100000
+    parsercontract: 0x54a80Ffd4F251CE87b0E4455aBE2c78Feb76B398
+    relaycontract: 0x08D751281654cF6E6951E303eC3c55f92a4B22bd
+  eth:
+    chainname: ETH
+    endpoint: https://mainnet.infura.io/v3/912428899eec4924a9d12ae1d8c5ccfb
+    framesize: 100000
+    lastvisitedblock: 13063599
+    lockdepth: 100000
+    parsercontract: 0x84921D3a4cFA23ddC5674Cf8C5E9FFbfEaDb95aE
+    relaycontract: 0xBC13c09a5098E3CF0c71Aa4F6D467D53b68C278F
+  ftm:
+    chainname: FTM
+    endpoint: https://rpcapi.fantom.network
+    framesize: 100000
+    lastvisitedblock: 15072684
+    lockdepth: 100000
+    parsercontract: 0x8eF059AcA2bc45E7B5954514FCF127CA46471365
+    relaycontract: 0xf3D45322f06eCd0F579fEC5a917B685FBa488b46
+  hec:
+    chainname: HEC
+    endpoint: https://http-mainnet-node.huobichain.com
+    framesize: 5000
+    lastvisitedblock: 7529529
+    lockdepth: 100000
+    parsercontract: 0xFBe64d17911DC0a2AC5977C9a8Bc0183104922Df
+    relaycontract: 0x08D751281654cF6E6951E303eC3c55f92a4B22bd
+  plg:
+    chainname: PLG
+    endpoint: https://matic-mainnet.chainstacklabs.com
+    framesize: 100000
+    lastvisitedblock: 18202690
+    lockdepth: 100000
+    parsercontract: 0x8C25b65C56eBec7272Bf2eBB98d70c1B5b65FCC2
+    relaycontract: 0xDc9F9ece8d24214fc8De90BCD21808b73060B63f
+monitorchains:
+  - ftm
+  - plg
+  - hec
+  - eth
+  - ava
+  - dai
+  - bsc
