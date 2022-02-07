@@ -1,0 +1,18 @@
+```toml
+type = "webhook"
+schemaVersion = 1
+name = ""
+observationSource = """
+parse_round_id  [type=jsonparse path="round_id" data="$(jobRun.requestBody)"]
+parse_round_data  [type=jsonparse path="round_data" data="$(jobRun.requestBody)"]
+
+encode_tx    [type=ethabiencode
+              abi="pushRoundData(uint32 round, int256[] memory values)"
+              data="{\\"round\\": $(parse_round_id),\\"values\\": $(parse_round_data)}"]
+
+submit_tx          [type="ethtx"
+               to="0xdC2C655604A138aaEa4E9C15698C5DB26391e75A"
+               data="$(encode_tx)"]
+parse_round_id -> parse_round_data -> encode_tx -> submit_tx
+"""
+```

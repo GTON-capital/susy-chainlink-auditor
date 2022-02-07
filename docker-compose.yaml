@@ -1,13 +1,13 @@
 version: "3.8"
 
-services: 
+services:
   postgres:
     image: postgres:13.1-alpine
     ports:
       - 5433:5432
-    env_file: 
+    env_file:
       - postgres.env
-    volumes: 
+    volumes:
       - ./db-data:/var/lib/postgresql/data
 
   chainlink:
@@ -16,14 +16,24 @@ services:
       - chainlink.env
     command: local node -p /chainlink/.password -a /chainlink/.api
     restart: on-failure
-    ports: 
+    ports:
       - 7788:6688
     links:
       - postgres
-    depends_on: 
+    depends_on:
       - postgres
     volumes:
       - ./chainlink_data:/chainlink
+  feed-initiator:
+    build: ./susy-feed-initiator
+    environment:
+      - SUSY_FEED_URL=http://chainlink:6688
+      - SUSY_FEED_EMAIL=email@email.com
+      - SUSY_FEED_PASSWORD=password
+      - SUSY_FEED_JOB_ID=244b8cc7-d791-4c98-a307-4b4affda6927
+      - SUSY_FEED_CHAIN_URL=https://rpc.ftm.tools/
+      - SUSY_FEED_BLOCKS_FRAME=100
+      - SUSY_FEED_DURATION=2h
 
 # volumes: 
 #   db-data:

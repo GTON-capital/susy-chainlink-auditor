@@ -15,3 +15,7 @@
 # vendor/
 chainlink_data/*
 susy-external-initiator/config.yaml
+config.yaml
+chainlink/*
+susy-feed-initiator/susy-feed-initiator
+.env
