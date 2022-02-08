@@ -33,7 +33,7 @@ services:
       - SUSY_FEED_JOB_ID=244b8cc7-d791-4c98-a307-4b4affda6927
       - SUSY_FEED_CHAIN_URL=https://rpc.ftm.tools/
       - SUSY_FEED_BLOCKS_FRAME=100
-      - SUSY_FEED_DURATION=2h
+      - SUSY_FEED_SCHEDULER=*/1 * * * *
 
 # volumes: 
 #   db-data:

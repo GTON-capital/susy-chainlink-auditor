@@ -9,9 +9,7 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"os"
-	"os/signal"
 	"reflect"
-	"syscall"
 	"time"
 
 	"susy-feed-initiator/config"
@@ -63,6 +61,7 @@ func SendInfo(round uint64, value uint64) error {
 }
 
 func Round() {
+	log.Print("start polling round")
 	s := sources.NewCoinGeckoDataSource()
 	price := uint64(math.Round(s.GetFloat64("gton") * 100))
 	round := s.GetRoundId()
@@ -70,7 +69,7 @@ func Round() {
 	if err != nil {
 		log.Printf("error: %v", err)
 	}
-	// log.Print("end polling round")
+	log.Print("end polling round")
 }
 
 func main() {
@@ -105,12 +104,9 @@ func main() {
 	if err != nil {
 		log.Printf("unable to decode into struct, %v", err)
 	}
+	b, _ := json.MarshalIndent(config.RuntimeConfig, "", " ")
+	log.Printf("config: %s", string(b))
 	s := gocron.NewScheduler(time.UTC)
 	s.Cron(config.RuntimeConfig.Scheduler).Do(Round)
-	s.StartAsync()
-
-	termChan := make(chan os.Signal)
-	signal.Notify(termChan, syscall.SIGINT, syscall.SIGTERM)
-	<-termChan // Blocks here until either SIGINT or SIGTERM is received.
-
+	s.StartBlocking()
 }

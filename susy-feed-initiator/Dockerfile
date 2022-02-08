@@ -1,18 +1,15 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:latest
+FROM golang:1.16-alpine
 
 WORKDIR /app
 
-ENV GO111MODULE=on
-
-COPY . .
-RUN go mod tidy
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 
+COPY . .
 
 RUN go build -o /initiator
-
-# EXPOSE 8080
 
 CMD [ "/initiator" ]
