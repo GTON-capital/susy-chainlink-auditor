@@ -1,38 +1,46 @@
 
-
+## Initial setup
 ```
 git clone https://github.com/SuSy-One/susy-chainlink-auditor
 cd susy-chainlink-auditor/
 mkdir chainlink_data
 cd chainlink_data
 ```
+## Access settings
 
-создаем 2 файла
+Please note that Chainlink node enforces a password policy that requires a password to have at least 3 numbers and 3 symbols.
+First, create two config files in `./chainlink_data`:
 
-.password - в нем содержится пароль доступа
+`.password` -- node access password
 ```
-echo "MyVeryStrongP@ssword" > .password
+echo "MyVeryStrongP@ssword123" > .password
 ```
 
-.api - параметры доступа к api ноды
+`.api` - login/password for Chainlink Operator GUI access
 ```
 myemail@email.com
-StringPasswordForApi
+StringPasswordForApi123
 ```
-в файле chainlink.env пишем параметры запуска ноды
 
-запускаем ноду 
+## Node launch
+Edit `chainlink.env` and provide node launch parameters. 
+
+Launch the node:
 ```
 docker-compose up -d
 ```
 
-и заходим на ноду http://localhost:7788
+Use http://localhost:7788 to access Chainlink Operator GUI (or use ssh tunneling if hosting on a remote machine).
 
-вводим креды из файла .api
+Enter the credentials from `.api` file in the GUI.
 
-Попадаем в панель управления нодой. В разделе Keys в самом низу берем адрес ноды в чейне и сообщаем владельцу фида, чтобы авторизовать оракл. Также на этот адрес закидываем токены для оплаты транзакций.
+## Node setup
 
-Заходим в раздел Jobs, жмем *New Job*, выбираем формат TOML и создаем описание job
+In Chainlink Operator GUI, visit the Keys section and find your node's blockchain address. Share this address with the feed owner to authorize your oracle. In addition, top up this address with the native token to pay for transactions.
+
+## Job setup
+
+Visit the Jobs section in the GUI, click on *New Job*, select TOML as format and enter a job description:
 
 ```toml
 type = "webhook"
@@ -53,21 +61,21 @@ parse_round_id -> parse_round_data -> encode_tx -> submit_tx
 """
 ```
 
-Вместо DATA_FEED_CONTRACT_ADDRESS пишем адрес контракта фида, возвращаемся в раздел Jobs, выбираем только созданную Job и смотрим ее Definition, 
-копируем externalJobID.
+Replace `DATA_FEED_CONTRACT_ADDRESS` with the address of the feed contract.
+Return to the Jobs section, select the created *Job*, and view its *Definition* to copy the `externalJobID`. 
 
-Редактируем файл docker-compose.yaml - раздел *feed-initiator* секцию *environment*:
+Edit `docker-compose.yaml` file, section *feed-initiator*/*environment*:
 
 ```
-- SUSY_FEED_EMAIL=email@email.com #логин из файла .api
-- SUSY_FEED_PASSWORD=password #пароль из файла .api
-- SUSY_FEED_JOB_ID=244b8cc7-d791-4c98-a307-4b4affda6923 #сюда вставляем  externalJobID
+- SUSY_FEED_EMAIL=email@email.com #login from chainlink_data/.api
+- SUSY_FEED_PASSWORD=password #password from chainlink_data/.api
+- SUSY_FEED_JOB_ID=244b8cc7-d791-4c98-a307-4b4affda6923 #paste externalJobID from Job Definition
 - SUSY_FEED_CHAIN_URL=https://rpc.ftm.tools/
-- SUSY_FEED_BLOCKS_FRAME=100 #количество блоков в раунде
-- SUSY_FEED_DURATION=2h #время между пушами в фид
+- SUSY_FEED_BLOCKS_FRAME=100 #number of blocks in a round
+- SUSY_FEED_DURATION=2h #time interval between consecutive feed pushes
 ```
 
-перезапускаеи инициатор 
+Relaunch the feed initiator: 
 
 ```
 docker-compose up -d feed-initiator
