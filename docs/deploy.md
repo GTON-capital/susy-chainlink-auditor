@@ -72,7 +72,7 @@ Edit `docker-compose.yaml` file, section *feed-initiator*/*environment*:
 - SUSY_FEED_JOB_ID=244b8cc7-d791-4c98-a307-4b4affda6923 #paste externalJobID from Job Definition
 - SUSY_FEED_CHAIN_URL=https://rpc.ftm.tools/
 - SUSY_FEED_BLOCKS_FRAME=100 #number of blocks in a round
-- SUSY_FEED_DURATION=2h #time interval between consecutive feed pushes
+- SUSY_FEED_SCHEDULER=*/1 * * * * #time interval between consecutive feed pushes
 ```
 
 Relaunch the feed initiator: 
