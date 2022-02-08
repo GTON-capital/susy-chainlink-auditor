@@ -18,6 +18,8 @@ import (
 	"susy-feed-initiator/sources"
 
 	"github.com/spf13/viper"
+
+	"github.com/go-co-op/gocron"
 )
 
 const curDir = "./"
@@ -103,18 +105,9 @@ func main() {
 	if err != nil {
 		log.Printf("unable to decode into struct, %v", err)
 	}
-
-	go func() {
-		for {
-			Round()
-			dur, err := time.ParseDuration(config.RuntimeConfig.Duration)
-			if err != nil {
-				log.Printf("Error: cannot parse duration, setting default 1 hour")
-				dur = time.Hour
-			}
-			time.Sleep(dur)
-		}
-	}()
+	s := gocron.NewScheduler(time.UTC)
+	s.Cron(config.RuntimeConfig.Scheduler).Do(Round)
+	s.StartAsync()
 
 	termChan := make(chan os.Signal)
 	signal.Notify(termChan, syscall.SIGINT, syscall.SIGTERM)

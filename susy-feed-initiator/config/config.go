@@ -8,6 +8,7 @@ type Config struct {
 	ChainUrl    string `mapstructure:"SUSY_FEED_CHAIN_URL"`
 	BlocksFrame uint32 `mapstructure:"SUSY_FEED_BLOCKS_FRAME"`
 	Duration    string `mapstructure:"SUSY_FEED_DURATION"`
+	Scheduler   string `mapstructure:"SUSY_FEED_SCHEDULER"`
 }
 
 var RuntimeConfig Config
