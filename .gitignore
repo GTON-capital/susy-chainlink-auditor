@@ -19,3 +19,8 @@ config.yaml
 chainlink/*
 susy-feed-initiator/susy-feed-initiator
 .env
+
+chainlink-1/*
+chainlink-2/*
+chainlink-3/*
+chainlink-4/*

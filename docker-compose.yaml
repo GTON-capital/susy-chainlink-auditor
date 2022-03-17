@@ -10,11 +10,11 @@ services:
     volumes:
       - ./db-data:/var/lib/postgresql/data
 
-  chainlink:
-    build: .
+  node1:
+    build: ./node1
     env_file:
       - chainlink.env
-    command: local node -p /chainlink/.password -a /chainlink/.api
+    command: local node -p /chainlink-1/.password -a /chainlink-1/.api
     restart: on-failure
     ports:
       - 7788:6688
@@ -23,18 +23,54 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./chainlink_data:/chainlink
-  feed-initiator:
-    build: ./susy-feed-initiator
-    environment:
-      - SUSY_FEED_URL=http://chainlink:6688
-      - SUSY_FEED_EMAIL=email@email.com
-      - SUSY_FEED_PASSWORD=password
-      - SUSY_FEED_JOB_ID=244b8cc7-d791-4c98-a307-4b4affda6927
-      - SUSY_FEED_CHAIN_URL=https://rpc.ftm.tools/
-      - SUSY_FEED_BLOCKS_FRAME=100
-      - SUSY_FEED_SCHEDULER=*/1 * * * *
-
-# volumes: 
-#   db-data:
-#   chainlink_data:
+      - ./chainlink_data:/chainlink-1
+  # node2:
+  #   build: ./node2
+  #   env_file:
+  #     - chainlink.env
+  #   command: local node -p /chainlink-2/.password -a /chainlink-2/.api
+  #   restart: on-failure
+  #   ports:
+  #     - 7789:6688
+  #   links:
+  #     - postgres
+  #   depends_on:
+  #     - postgres
+  #   volumes:
+  #     - ./chainlink_data:/chainlink-2
+  # node3:
+  #   build: ./node3
+  #   env_file:
+  #     - chainlink.env
+  #   command: local node -p /chainlink-3/.password -a /chainlink-3/.api
+  #   restart: on-failure
+  #   ports:
+  #     - 7790:6688
+  #   links:
+  #     - postgres
+  #   depends_on:
+  #     - postgres
+  #   volumes:
+  #     - ./chainlink_data:/chainlink-3
+  # node4:
+  #   build: ./node4
+  #   env_file:
+  #     - chainlink.env
+  #   command: local node -p /chainlink-4/.password -a /chainlink-4/.api
+  #   restart: on-failure
+  #   ports:
+  #     - 7791:6688
+  #   links:
+  #     - postgres
+  #   depends_on:
+  #     - postgres
+  #   volumes:
+  #     - ./chainlink_data:/chainlink-4
+  bridge-peg-base:
+    build: ./peg-bridge
+    command: /initiator pegBase
+    restart: on-failure
+  bridge-peg-usd:
+    build: ./peg-bridge
+    command: /initiator pegUsd
+    restart: on-failure

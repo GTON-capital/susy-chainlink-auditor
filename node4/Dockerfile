@@ -1,4 +1,4 @@
-FROM dextrac/chainlink-olympics:latest
+FROM smartcontract/chainlink:1.2.0
 
 # Create the chainlink node root path
 RUN mkdir /chainlink
@@ -19,3 +19,12 @@ ENV WALLET_PASSWORD=$WALLET_PASSWORD
 RUN echo $API_USER_EMAIL > /chainlink/.api
 RUN echo $API_USER_PASSWORD >> /chainlink/.api
 RUN echo $WALLET_PASSWORD > /chainlink/.password
+
+
+ENV FEATURE_OFFCHAIN_REPORTING=true
+ENV FEATURE_OFFCHAIN_REPORTING2=true
+ENV P2P_NETWORKING_STACK=V1V2
+ENV P2PV2_LISTEN_ADDRESSES=0.0.0.0:9901
+ENV DATABASE_URL=postgresql://postgres:password@postgres:5432/chainlink4?sslmode=disable
+
+ENV P2P_LISTEN_PORT=7979
