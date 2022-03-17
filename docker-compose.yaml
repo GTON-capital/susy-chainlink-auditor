@@ -14,7 +14,7 @@ services:
     build: ./node1
     env_file:
       - chainlink.env
-    command: local node -p /chainlink-1/.password -a /chainlink-1/.api
+    command: local node -p /chainlink/.password -a /chainlink/.api
     restart: on-failure
     ports:
       - 7788:6688
@@ -23,12 +23,12 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./chainlink_data:/chainlink-1
+      - ./chainlink-1:/chainlink
   # node2:
   #   build: ./node2
   #   env_file:
   #     - chainlink.env
-  #   command: local node -p /chainlink-2/.password -a /chainlink-2/.api
+  #   command: local node -p /chainlink/.password -a /chainlink/.api
   #   restart: on-failure
   #   ports:
   #     - 7789:6688
@@ -37,12 +37,12 @@ services:
   #   depends_on:
   #     - postgres
   #   volumes:
-  #     - ./chainlink_data:/chainlink-2
+  #     - ./chainlink-2:/chainlink
   # node3:
   #   build: ./node3
   #   env_file:
   #     - chainlink.env
-  #   command: local node -p /chainlink-3/.password -a /chainlink-3/.api
+  #   command: local node -p /chainlink/.password -a /chainlink/.api
   #   restart: on-failure
   #   ports:
   #     - 7790:6688
@@ -51,12 +51,12 @@ services:
   #   depends_on:
   #     - postgres
   #   volumes:
-  #     - ./chainlink_data:/chainlink-3
+  #     - ./chainlink-3:/chainlink
   # node4:
   #   build: ./node4
   #   env_file:
   #     - chainlink.env
-  #   command: local node -p /chainlink-4/.password -a /chainlink-4/.api
+  #   command: local node -p /chainlink/.password -a /chainlink/.api
   #   restart: on-failure
   #   ports:
   #     - 7791:6688
@@ -65,7 +65,7 @@ services:
   #   depends_on:
   #     - postgres
   #   volumes:
-  #     - ./chainlink_data:/chainlink-4
+  #     - ./chainlink-4:/chainlink
   bridge-peg-base:
     build: ./peg-bridge
     command: /initiator pegBase

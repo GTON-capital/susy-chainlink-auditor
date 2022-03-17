@@ -20,7 +20,7 @@ RUN echo $API_USER_EMAIL > /chainlink/.api
 RUN echo $API_USER_PASSWORD >> /chainlink/.api
 RUN echo $WALLET_PASSWORD > /chainlink/.password
 
-ENV DATABASE_URL=postgresql://postgres:password@postgres:5432/chainlink1?sslmode=disable
+ENV DATABASE_URL=postgresql://postgres:password@postgres:5432/chainlink?sslmode=disable
 
 ENV FEATURE_OFFCHAIN_REPORTING=true
 ENV FEATURE_OFFCHAIN_REPORTING2=true
