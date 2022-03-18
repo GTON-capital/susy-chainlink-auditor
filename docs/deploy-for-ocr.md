@@ -3,13 +3,13 @@
 ```
 git clone https://github.com/SuSy-One/susy-chainlink-auditor
 cd susy-chainlink-auditor/
-mkdir chainlink_data
-cd chainlink_data
+mkdir chainlink-1
+cd chainlink-1
 ```
 ## Access settings
 
 Please note that Chainlink node enforces a password policy that requires a password to have at least 3 numbers and 3 symbols.
-First, create two config files in `./chainlink_data`:
+First, create two config files in `./chainlink-1`:
 
 `.password` -- node access password
 ```
