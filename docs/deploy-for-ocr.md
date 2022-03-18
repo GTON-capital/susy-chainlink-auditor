@@ -41,7 +41,7 @@ In Chainlink Operator GUI, visit the Keys section and this node info:
 From section Off-Chain Reporting Keys
 1. Key ID (looks like 17eb5381e82a6dddc0b19bfbf8abd38538cc1119c3a68208c71b31dd42decd80)
 2. Signing Address (looks like ocrsad_0xBca902E8349e61b621e5DcA09AACce4212f91DC5)
-
+3. Peer ID (looks like p2p_12D3KooWJUknXTJfuyFKa7UnJYMSJB811s5ymvBjSQcAjpnSjyBT)
 From section EVM Chain Accounts
 1. EVM address
 2. Operator Wallet address for rewards
