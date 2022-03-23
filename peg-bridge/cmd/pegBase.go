@@ -54,10 +54,40 @@ func init() {
 type PegBaseBridge struct{}
 
 func (gs *PegBaseBridge) Run(h *bridges.Helper) (interface{}, error) {
+	/*
+		Method base-price (https://pw-rs.gton.capital/rpc/base-price)
+		Method owned/base-pool-lps (https://pw-rs.gton.capital/rpc/owned/base-pool-lps)
+		Method owned/usd-pool-lps (https://pw-rs.gton.capital/rpc/owned/usd-pool-lps)
+		Method base-liquidity (https://pw-rs.gton.capital/rpc/base-liquidity)
+		Method usd-liquidity (https://pw-rs.gton.capital/rpc/usd-liquidity)
+		Method base-pool-lps (https://pw-rs.gton.capital/rpc/base-pool-lps)
+		Method usd-pool-lps (https://pw-rs.gton.capital/rpc/usd-pool-lps)
+		Method gc-pol (https://pw-rs.gton.capital/rpc/gc-pol)
+	*/
+	from := h.GetParam("from")
+	url := ""
+	switch from {
+	case "base-price":
+		url = "https://pw-rs.gton.capital/rpc/base-price"
+	case "owned/base-pool-lps":
+		url = "https://pw-rs.gton.capital/rpc/owned/base-pool-lps"
+	case "owned/usd-pool-lps":
+		url = "https://pw-rs.gton.capital/rpc/owned/usd-pool-lps"
+	case "base-liquidity":
+		url = "https://pw-rs.gton.capital/rpc/base-liquidity"
+	case "usd-liquidity":
+		url = "https://pw-rs.gton.capital/rpc/usd-liquidity"
+	case "base-pool-lps":
+		url = "https://pw-rs.gton.capital/rpc/base-pool-lps"
+	case "usd-pool-lps":
+		url = "https://pw-rs.gton.capital/rpc/usd-pool-lps"
+	case "gc-pol":
+		url = "https://pw-rs.gton.capital/rpc/gc-pol"
+	}
 	obj := make(map[string]interface{})
 	err := h.HTTPCall(
 		http.MethodGet,
-		"https://pw.gton.capital/rpc/gc-current-peg-base",
+		url,
 		&obj,
 	)
 	return obj, err
