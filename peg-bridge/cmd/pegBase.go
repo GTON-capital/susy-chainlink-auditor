@@ -16,6 +16,7 @@ limitations under the License.
 package cmd
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/linkpoolio/bridges"
@@ -65,25 +66,8 @@ func (gs *PegBaseBridge) Run(h *bridges.Helper) (interface{}, error) {
 		Method gc-pol (https://pw-rs.gton.capital/rpc/gc-pol)
 	*/
 	from := h.GetParam("from")
-	url := ""
-	switch from {
-	case "base-price":
-		url = "https://pw-rs.gton.capital/rpc/base-price"
-	case "owned/base-pool-lps":
-		url = "https://pw-rs.gton.capital/rpc/owned/base-pool-lps"
-	case "owned/usd-pool-lps":
-		url = "https://pw-rs.gton.capital/rpc/owned/usd-pool-lps"
-	case "base-liquidity":
-		url = "https://pw-rs.gton.capital/rpc/base-liquidity"
-	case "usd-liquidity":
-		url = "https://pw-rs.gton.capital/rpc/usd-liquidity"
-	case "base-pool-lps":
-		url = "https://pw-rs.gton.capital/rpc/base-pool-lps"
-	case "usd-pool-lps":
-		url = "https://pw-rs.gton.capital/rpc/usd-pool-lps"
-	case "gc-pol":
-		url = "https://pw-rs.gton.capital/rpc/gc-pol"
-	}
+	url := fmt.Sprintf("https://pw-rs.gton.capital/rpc/%s", from)
+
 	obj := make(map[string]interface{})
 	err := h.HTTPCall(
 		http.MethodGet,
