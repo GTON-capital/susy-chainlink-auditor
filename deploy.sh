@@ -26,6 +26,7 @@ done
 
 
 docker -v
+
 if [ $? -eq 0 ]; then
   echo '\033[0;33mdocker already installed'
   echo '\033[0m '
@@ -48,11 +49,12 @@ else
 fi
 
 docker-compose -v
+
 if [ $? -eq 0 ]; then
   echo '\033[0;34mdocker-compose already installed'
   echo '\033[0m '
 else 
-  sudo apt-get install docker-compose-plugin
+  sudo apt-get install docker-compose
   docker-compose -v
   if [ $? -eq 0 ]; then 
     echo '\033[0;32mdocker-compose successfully installed'
