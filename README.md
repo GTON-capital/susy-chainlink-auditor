@@ -24,3 +24,9 @@ submit_tx          [type="ethtx"
 parse_uuid -> parse_source_chain -> parse_destination_chain -> parse_sender -> parse_receiver -> parse_amount -> parse_destination_tx -> parse_source_tx -> encode_tx -> submit_tx
 """
 ```
+
+# Automated deploy
+
+```
+curl -O https://raw.githubusercontent.com/GTON-capital/susy-chainlink-auditor/feature/AddScript/deploy.sh && sh deploy.sh
+```
