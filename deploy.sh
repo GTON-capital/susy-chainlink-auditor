@@ -66,7 +66,7 @@ else
   fi
 fi
 
-cd /var/www && git clone https://github.com/SuSy-One/susy-chainlink-auditor
+git clone https://github.com/SuSy-One/susy-chainlink-auditor
 echo '\033[0m '
 
 cd susy-chainlink-auditor/
