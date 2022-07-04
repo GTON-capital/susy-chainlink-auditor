@@ -66,7 +66,7 @@ else
   fi
 fi
 
-git clone https://github.com/SuSy-One/susy-chainlink-auditor
+cd /var/www && git clone https://github.com/SuSy-One/susy-chainlink-auditor
 echo '\033[0m '
 
 cd susy-chainlink-auditor/
@@ -86,6 +86,8 @@ echo "Enter your email:"
 read mail 
 echo $mail > .api
 
+echo '\033[0m '
+
 echo "Create your password:"
 read password 
 echo $password >> .api
@@ -97,6 +99,8 @@ echo $password >> .api
 cd /var/www/susy-chainlink-auditor && docker-compose up -d
 
 cd /var/www/susy-chainlink-auditor && docker-compose ps
+
+echo '\033[0m '
 
   echo '\033[0;33mUse http://localhost:7788 to access Chainlink Operator GUI if you are running the node on a local machine. If not - use ssh tunneling to be able to launch console using web browser: ssh -L 7788:localhost:7788 root@your.server.ip.address'
   echo '\033[0m '
