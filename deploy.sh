@@ -104,3 +104,22 @@ echo '\033[0m '
 
   echo '\033[0;33mUse http://localhost:7788 to access Chainlink Operator GUI if you are running the node on a local machine. If not - use ssh tunneling to be able to launch console using web browser: ssh -L 7788:localhost:7788 root@your.server.ip.address'
   echo '\033[0m '
+
+echo 'Your node info:'
+
+sudo docker-compose exec node1 chainlink admin login
+
+echo '\033[0m '
+
+sudo docker-compose exec node1 chainlink keys eth list
+
+echo '\033[0m '
+
+sudo docker-compose exec node1 chainlink keys ocr list
+
+echo '\033[0m '
+
+sudo docker-compose exec node1 chainlink keys p2p list
+
+echo '\033[0m '
+
