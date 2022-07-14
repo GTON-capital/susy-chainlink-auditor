@@ -9,6 +9,10 @@ services:
       - postgres.env
     volumes:
       - ./db-data:/var/lib/postgresql/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2g"
 
   node1:
     build: ./node1
@@ -25,6 +29,11 @@ services:
       - postgres
     volumes:
       - ./chainlink-1:/chainlink
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2g"
+
   # node2:
   #   build: ./node2
   #   env_file:
