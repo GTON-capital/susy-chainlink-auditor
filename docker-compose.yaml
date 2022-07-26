@@ -9,6 +9,11 @@ services:
       - postgres.env
     volumes:
       - ./db-data:/var/lib/postgresql/data
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "1g"
+            max-file: "3"
 
   node1:
     build: ./node1
@@ -19,13 +24,20 @@ services:
     ports:
       - 7788:6688
       - 7979:7979
+
     links:
       - postgres
     depends_on:
       - postgres
     volumes:
       - ./chainlink-1:/chainlink
-  # node2:
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "1g"
+            max-file: "3"
+
+ # node2:
   #   build: ./node2
   #   env_file:
   #     - chainlink.env
@@ -71,7 +83,17 @@ services:
     build: ./peg-bridge
     command: /initiator pegBase
     restart: on-failure
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1g"
+        max-file: "3"
   bridge-peg-usd:
     build: ./peg-bridge
     command: /initiator pegUsd
     restart: on-failure
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1g"
+        max-file: "3"
