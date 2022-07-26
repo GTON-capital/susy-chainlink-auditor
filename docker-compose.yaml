@@ -10,10 +10,11 @@ services:
     volumes:
       - ./db-data:/var/lib/postgresql/data
     logging:
-      driver: "json-file"
-      options:
-        max-size: "1g"
-        max-file: "3"
+        driver: "json-file"
+        options:
+            max-size: "1g"
+            max-file: "3"
+
 
   node1:
     build: ./node1
@@ -24,6 +25,7 @@ services:
     ports:
       - 7788:6688
       - 7979:7979
+
     links:
       - postgres
     depends_on:
@@ -31,11 +33,11 @@ services:
     volumes:
       - ./chainlink-1:/chainlink
     logging:
-      driver: "json-file"
-      options:
-        max-size: "1g"
-        max-file: "3"
-
+        driver: "json-file"
+        options:
+            max-size: "1g"
+            max-file: "3"
+            
   # node2:
   #   build: ./node2
   #   env_file:
