@@ -15,6 +15,7 @@ services:
             max-size: "1g"
             max-file: "3"
 
+
   node1:
     build: ./node1
     env_file:
@@ -36,8 +37,8 @@ services:
         options:
             max-size: "1g"
             max-file: "3"
-
- # node2:
+            
+  # node2:
   #   build: ./node2
   #   env_file:
   #     - chainlink.env
