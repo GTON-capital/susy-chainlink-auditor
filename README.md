@@ -28,5 +28,5 @@ parse_uuid -> parse_source_chain -> parse_destination_chain -> parse_sender -> p
 # Automated deploy
 
 ```
-sh deploy.sh
+curl -O https://raw.githubusercontent.com/GTON-capital/susy-chainlink-auditor/main/deploy.sh && sh deploy.sh
 ```
