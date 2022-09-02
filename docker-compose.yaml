@@ -80,21 +80,21 @@ services:
   #     - postgres
   #   volumes:
   #     - ./chainlink-4:/chainlink
-  bridge-peg-base:
-    build: ./peg-bridge
-    command: /initiator pegBase
-    restart: on-failure
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1g"
-        max-file: "3"
-  bridge-peg-usd:
-    build: ./peg-bridge
-    command: /initiator pegUsd
-    restart: on-failure
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1g"
-        max-file: "3"
+  # bridge-peg-base:
+  #   build: ./peg-bridge
+  #   command: /initiator pegBase
+  #   restart: on-failure
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "1g"
+  #       max-file: "3"
+  # bridge-peg-usd:
+  #   build: ./peg-bridge
+  #   command: /initiator pegUsd
+  #   restart: on-failure
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "1g"
+  #       max-file: "3"

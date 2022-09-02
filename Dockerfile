@@ -1,4 +1,4 @@
-FROM dextrac/chainlink-olympics:latest
+FROM smartcontract/chainlink:1.8.0-root
 
 # Create the chainlink node root path
 RUN mkdir /chainlink

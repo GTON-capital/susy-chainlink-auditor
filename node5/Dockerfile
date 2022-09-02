@@ -1,4 +1,4 @@
-FROM smartcontract/chainlink:1.2.0
+FROM smartcontract/chainlink:1.8.0-root
 
 # Create the chainlink node root path
 RUN mkdir /chainlink
