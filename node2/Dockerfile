@@ -20,17 +20,11 @@ RUN echo $API_USER_EMAIL > /chainlink/.api
 RUN echo $API_USER_PASSWORD >> /chainlink/.api
 RUN echo $WALLET_PASSWORD > /chainlink/.password
 
-
-
 ENV DATABASE_URL=postgresql://postgres:password@postgres:5432/chainlink2?sslmode=disable
-
 
 ENV FEATURE_OFFCHAIN_REPORTING=true
 ENV FEATURE_OFFCHAIN_REPORTING2=true
 ENV P2P_NETWORKING_STACK=V1V2
 ENV P2PV2_LISTEN_ADDRESSES=0.0.0.0:9901
-
-
-
 
 ENV P2P_LISTEN_PORT=9902
