@@ -37,6 +37,8 @@ services:
         options:
             max-size: "1g"
             max-file: "3"
+    environment:
+        P2P_ANNOUNCE_IP: ${THIS_SYSTEM_IP}
             
   # node2:
   #   build: ./node2
