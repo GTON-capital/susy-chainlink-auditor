@@ -3,8 +3,6 @@ version: "3.3"
 services:
   postgres:
     image: postgres:13.1-alpine
-    ports:
-      - 5433:5432
     env_file:
       - postgres.env
     volumes:
@@ -14,7 +12,50 @@ services:
         options:
             max-size: "1g"
             max-file: "3"
-
+  postgres2:
+    image: postgres:13.1-alpine
+    env_file:
+      - postgres.env
+    volumes:
+      - ./db-data2:/var/lib/postgresql/data
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "1g"
+            max-file: "3"
+  postgres3:
+    image: postgres:13.1-alpine
+    env_file:
+      - postgres.env
+    volumes:
+      - ./db-data3:/var/lib/postgresql/data
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "1g"
+            max-file: "3"
+  postgres4:
+    image: postgres:13.1-alpine
+    env_file:
+      - postgres.env
+    volumes:
+      - ./db-data4:/var/lib/postgresql/data
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "1g"
+            max-file: "3"
+  postgres5:
+    image: postgres:13.1-alpine
+    env_file:
+      - postgres.env
+    volumes:
+      - ./db-data5:/var/lib/postgresql/data
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "1g"
+            max-file: "3"
 
   node1:
     build: ./node1
@@ -37,66 +78,64 @@ services:
         options:
             max-size: "1g"
             max-file: "3"
-    environment:
-        P2P_ANNOUNCE_IP: ${THIS_SYSTEM_IP}
             
-  # node2:
-  #   build: ./node2
-  #   env_file:
-  #     - chainlink.env
-  #   command: local node -p /chainlink/.password -a /chainlink/.api
-  #   restart: on-failure
-  #   ports:
-  #     - 7789:6688
-  #   links:
-  #     - postgres
-  #   depends_on:
-  #     - postgres
-  #   volumes:
-  #     - ./chainlink-2:/chainlink
-  # node3:
-  #   build: ./node3
-  #   env_file:
-  #     - chainlink.env
-  #   command: local node -p /chainlink/.password -a /chainlink/.api
-  #   restart: on-failure
-  #   ports:
-  #     - 7790:6688
-  #   links:
-  #     - postgres
-  #   depends_on:
-  #     - postgres
-  #   volumes:
-  #     - ./chainlink-3:/chainlink
-  # node4:
-  #   build: ./node4
-  #   env_file:
-  #     - chainlink.env
-  #   command: local node -p /chainlink/.password -a /chainlink/.api
-  #   restart: on-failure
-  #   ports:
-  #     - 7791:6688
-  #   links:
-  #     - postgres
-  #   depends_on:
-  #     - postgres
-  #   volumes:
-  #     - ./chainlink-4:/chainlink
-  # bridge-peg-base:
-  #   build: ./peg-bridge
-  #   command: /initiator pegBase
-  #   restart: on-failure
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "1g"
-  #       max-file: "3"
-  # bridge-peg-usd:
-  #   build: ./peg-bridge
-  #   command: /initiator pegUsd
-  #   restart: on-failure
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "1g"
-  #       max-file: "3"
+  node2:
+    build: ./node2
+    env_file:
+      - chainlink.env
+    command: local node -p /chainlink/.password -a /chainlink/.api
+    restart: on-failure
+    ports:
+      - 7789:6688
+      - 7980:7979
+    links:
+      - postgres2
+    depends_on:
+      - postgres2
+    volumes:
+      - ./chainlink-2:/chainlink
+  node3:
+    build: ./node3
+    env_file:
+      - chainlink.env
+    command: local node -p /chainlink/.password -a /chainlink/.api
+    restart: on-failure
+    ports:
+      - 7790:6688
+      - 7981:7979
+    links:
+      - postgres3
+    depends_on:
+      - postgres3
+    volumes:
+      - ./chainlink-3:/chainlink
+  node4:
+    build: ./node4
+    env_file:
+      - chainlink.env
+    command: local node -p /chainlink/.password -a /chainlink/.api
+    restart: on-failure
+    ports:
+      - 7791:6688
+      - 7982:7979
+    links:
+      - postgres4
+    depends_on:
+      - postgres4
+    volumes:
+      - ./chainlink-4:/chainlink
+  node5:
+    build: ./node5
+    env_file:
+      - chainlink.env
+    command: local node -p /chainlink/.password -a /chainlink/.api
+    restart: on-failure
+    ports:
+      - 7792:6688
+      - 7983:7979
+    links:
+      - postgres5
+    depends_on:
+      - postgres5
+    volumes:
+      - ./chainlink-5:/chainlink
